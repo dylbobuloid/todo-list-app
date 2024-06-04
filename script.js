@@ -19,6 +19,7 @@ function addTask(){
         li.appendChild(span);
     }
     inputBox.value = "";
+    savaData();
 }
 
 listContainer.addEventListener("click", function(e){
@@ -26,10 +27,26 @@ listContainer.addEventListener("click", function(e){
     // If the list element is toggled it is cycled between checked and unchecked
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("checked");
+        savaData();
 
     }
    //If the X is pressed beside the list element the element is removed
     else if(e.target.tagName == "SPAN"){
         e.target.parentElement.remove();
+        savaData();
     }
 }, false);
+
+
+function savaData(){
+    //Saves the container into local storage as "data"
+    localStorage.setItem("data", listContainer.innerHTML);
+}
+
+//Function to display the saved data from the container
+function showTask(){
+    listContainer.innerHTML = localStorage.getItem("data")
+}
+
+//calls the function to display the saved data
+showTask()
