@@ -13,6 +13,23 @@ function addTask(){
         let li = document.createElement("li");
         li.innerHTML = inputBox.value;
         listContainer.appendChild(li);
+        //Adds an inline style to the text but adds an X at the end pf the list element
+        let span = document.createElement("span");
+        span.innerHTML = "\u00d7";
+        li.appendChild(span);
     }
     inputBox.value = "";
 }
+
+listContainer.addEventListener("click", function(e){
+    //Checks where the cursor is on the screen if LI element is clicked
+    // If the list element is toggled it is cycled between checked and unchecked
+    if(e.target.tagName === "LI"){
+        e.target.classList.toggle("checked");
+
+    }
+   //If the X is pressed beside the list element the element is removed
+    else if(e.target.tagName == "SPAN"){
+        e.target.parentElement.remove();
+    }
+}, false);
